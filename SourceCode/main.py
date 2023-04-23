@@ -6,9 +6,9 @@ import glob
 import os
 
 # path to the folder containing the images
-path = "C:/Users/user/Documents/Semester 4/Pengantar Pemrosesan Data Multimedia/Tugas2/AssetImage/*.jpg"
+path = "AssetImage/*.jpg"
 
-# Modul for convert image to pixel
+# looping for processing all images
 for img_path in glob.glob(path):
     # get the file name
     file_name = os.path.basename(img_path)
@@ -17,22 +17,23 @@ for img_path in glob.glob(path):
     img = io.imread(img_path)
 
     # print file name
-    print(Fore.BLUE,"Image Name : ", file_name, Style.RESET_ALL)
+    print(Fore.BLUE, "Image Name : ", file_name, Style.RESET_ALL)
 
     # color analysis process
     # convert image to pixel matrix
     img_to_pxl(img)
 
-    # # image histogram
+    # image histogram
     histogram(img)
 
-    # # first order statistic
+    # first order statistic
     first_order_statistic(img)
 
     # texture analysis process
+    # GLCM
     GLCM(img)
 
-    # texture histo
+    # texture histogram
     txt_histogram(img)
 
     # first order statistic

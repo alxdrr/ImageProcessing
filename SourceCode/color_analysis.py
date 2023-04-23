@@ -1,7 +1,7 @@
 from colorama import Fore, Style
 import numpy as np
 from matplotlib import pyplot as plt
-from scipy.stats import skew, kurtosis, entropy
+from scipy.stats import skew, kurtosis
 import cv2
 
 def img_to_pxl(img):
@@ -15,36 +15,33 @@ def img_to_pxl(img):
     print(Fore.GREEN,"Pixel Matrix \t: \n", Style.RESET_ALL, pixel_matrix, "\n================================================", sep="")
 
 def histogram(img):
-    print(Fore.GREEN,"Histogram \t:", Style.RESET_ALL)
-    # Convert image from BGR to RGB
+    print(Fore.GREEN,"Color Histogram \t:", Style.RESET_ALL)
+    # convert image from BGR to RGB
     img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
 
-    # Create histogram
-    hist, bins = np.histogram(img.ravel(), 256, [0, 256])
-
-    # Plot histogram
+    # plot histogram
     plt.hist(img.ravel(), 256, [0, 256])
     plt.show()
 
 def first_order_statistic(img):
-    # Calculate mean
+    # calculate mean
     mean = np.mean(img)
 
-    # Calculate skewness
+    # calculate skewness
     skewness = skew(img.ravel())
 
-    # Calculate variance
+    # calculate variance
     variance = np.var(img)
 
-    # Calculate kurtosis
+    # calculate kurtosis
     kurt = kurtosis(img.ravel())
 
-    # Calculate entropy
+    # calculate entropy
     hist, _ = np.histogram(img, bins=256)
     hist = hist.astype(float) / np.sum(hist)
     entropy = -np.sum(hist * np.log2(hist + (hist == 0)))
 
-    # Print results
+    # print results
     print(Fore.GREEN,"First Order Statistic \t:", Style.RESET_ALL)
     print("Mean:", mean)
     print("Skewness:", skewness)
